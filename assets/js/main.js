@@ -61,7 +61,8 @@ class AppStorageService {
 
 // Time Block Class Definition
 class TimeBlock {
-  constructor(hour, blockState, scheduledEvent, rootEl, id) {
+  constructor(hour, blockState, scheduledEvent, rootEl, id, app) {
+    this.app = app;
     this.id = id;
     this.rootEl = rootEl;
     this.hour = hour;
@@ -70,10 +71,10 @@ class TimeBlock {
     this.template = `
       <div class="row time-block" id="timeBlock-${this.id}">
         <div class="col-3 col-md-2 col-lg-1 hour">
-          <p>${this.hour}</p>
+          <p>${this.hour}:00</p>
         </div>
 
-        <textarea class="col ${this.blockState}">Event</textarea>
+        <textarea class="col ${this.blockState}" id="${this.id}-text">Event</textarea>
 
         <button
           class="btn saveBtn col-3 col-md-2 col-lg-1 d-flex align-items-center justify-content-center"
@@ -94,6 +95,7 @@ class TimeBlock {
   attachEventHandlers() {
     $(`#${this.id}-btn`).click(() => {
       console.log(`#${this.id}-btn`);
+      app.saveEvent(this.hour, $(`#${this.id}-text`).val());
     });
   }
 
@@ -119,7 +121,9 @@ class App {
 
   update() {}
 
-  saveEvent() {}
+  saveEvent(eventID, text) {
+    this.appStorageService.setEvent(eventID, text);
+  }
 
   render() {
     for (let i = this.dayStartHour; i <= this.dayEndHour; i++) {
@@ -137,7 +141,8 @@ class App {
         blockState,
         undefined,
         this.timeBlockWrapper,
-        i
+        i,
+        this
       );
       $(this.timeBlockWrapper).append(timeBlock.render());
       timeBlock.attachEventHandlers();
