@@ -55,19 +55,6 @@ class AppStorageService {
     return this.events;
   }
 
-  // Get individual saved event by hour (24HR format)
-  getEvent(hour) {
-    if (this.events.length) {
-      let index = this.events.findIndex((event) => {
-        return event.hour == hour;
-      });
-
-      return index;
-    } else {
-      return false;
-    }
-  }
-
   setEvent(hour, text) {
     const event = {
       hour: hour,
@@ -95,10 +82,9 @@ class AppStorageService {
 
 // Time Block Class Definition
 class TimeBlock {
-  constructor(hour, blockState, scheduledEvent, rootEl, id, app) {
+  constructor(hour, blockState, scheduledEvent, id, app) {
     this.app = app;
     this.id = id;
-    this.rootEl = rootEl;
     this.hour = hour;
     this.blockState = blockState;
     this.scheduledEvent = scheduledEvent;
@@ -171,14 +157,7 @@ class App {
         blockState = "future";
       }
 
-      let timeBlock = new TimeBlock(
-        i,
-        blockState,
-        "Event",
-        this.timeBlockWrapper,
-        i,
-        this
-      );
+      let timeBlock = new TimeBlock(i, blockState, "Event", i, this);
 
       this.timeBlocks.push(timeBlock);
     }
