@@ -103,11 +103,14 @@ class TimeBlock {
             <p>${this.hour}:00</p>
           </div>
 
-          <textarea class="col ${this.blockState}" id="${this.id}-text">${this.scheduledEvent}</textarea>
+          <textarea class="col ${this.blockState}" id="${this.id}-text" ${
+      this.blockState === "past" ? "disabled" : ""
+    }>${this.scheduledEvent}</textarea>
 
           <button
             class="btn saveBtn col-2 col-md-2 col-lg-1 d-flex align-items-center justify-content-center"
             id="${this.id}-btn"
+            ${this.blockState === "past" ? "disabled" : ""}
           >
             <i class="fas fa-save fa-lg"></i>
           </button>
@@ -135,6 +138,7 @@ class App {
     this.dayEndHour = 17;
   }
 
+  // Initialize Application
   init() {
     console.log(`Initializing Application...\n`);
     this.appStorageService.init();
@@ -145,6 +149,7 @@ class App {
     this.render();
   }
 
+  // Initialize Time Block Objects
   initTimeBlocks() {
     for (let i = this.dayStartHour; i <= this.dayEndHour; i++) {
       let blockState;
@@ -157,7 +162,7 @@ class App {
         blockState = "future";
       }
 
-      let timeBlock = new TimeBlock(i, blockState, "Event", i, this);
+      let timeBlock = new TimeBlock(i, blockState, "", i, this);
 
       this.timeBlocks.push(timeBlock);
     }
