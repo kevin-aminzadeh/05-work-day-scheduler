@@ -44,7 +44,7 @@ THEN the saved events persist
 
 The various logical components of the application were first identified through the analysis of the requirements specifications, the `App`, `TimeBlock` and `AppStorageService` ES6 classes were then derived from this process. The purpose and functionality of each of these classes is described below:
 
-### **`App Class`**
+### **`App` Class**
 
 The `App` class is the overarching class in the application responsible for implementing the application's general functionality using its own methods and the methods of the `TimeBlock` and `AppStorageService` classes.
 
@@ -54,11 +54,11 @@ After this, the class calls its own `initTimeBlocks()` method; The `initTimeBloc
 
 At the time of creating a new `TimeBlock` instance, the `initTimeBlocks()` method determines if the hour in the current iteration of the loop is **"past"**, **"present"** or **"future"**; it then passes this value as the `blockState` parameter of the `TimeBlock`.
 
-### **`TimeBlock Class`**
+### **`TimeBlock` Class**
 
 The `TimeBlock` class is a relatively simple view class which is responsible for rendering each time-block given the required data and attaching event handlers to each time-block's save button using its `attachEventHandlers()` method.
 
-### **`AppStorageService Class`**
+### **`AppStorageService` Class**
 
 The `AppStorageService` class is an abstract class designed loosely around Angular's concept of service classes. This class is a data/storage service provider and through its various methods allows interaction with and manipulation of Local Storage data.
 
