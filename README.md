@@ -4,7 +4,7 @@
   <img src="./assets/img/demo.gif" alt="JavaScript Work Day Scheduler Screenshot">
 </p>
 
-> <h2 align="center"><a  href="https://kevin-aminzadeh.github.io/05-work-day-scheduler/">Live Demo</a></h2>
+> <h2 align="center"><a  href="https://kevin-aminzadeh.github.io/work-day-scheduler/">Live Demo</a></h2>
 
 ## Table of Contents
 
